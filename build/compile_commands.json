@@ -1,0 +1,20 @@
+[
+{
+  "directory": "F:/cmake_study/memoryGroundPlus/build",
+  "command": "F:\\mingw64\\bin\\cc.exe -IF:/cmake_study/memoryGroundPlus/include -g -o CMakeFiles\\outputFile.dir\\sources\\main.c.obj -c F:\\cmake_study\\memoryGroundPlus\\sources\\main.c",
+  "file": "F:/cmake_study/memoryGroundPlus/sources/main.c",
+  "output": "F:/cmake_study/memoryGroundPlus/build/CMakeFiles/outputFile.dir/sources/main.c.obj"
+},
+{
+  "directory": "F:/cmake_study/memoryGroundPlus/build",
+  "command": "F:\\mingw64\\bin\\cc.exe -IF:/cmake_study/memoryGroundPlus/include -g -o CMakeFiles\\outputFile.dir\\sources\\memGroundP.c.obj -c F:\\cmake_study\\memoryGroundPlus\\sources\\memGroundP.c",
+  "file": "F:/cmake_study/memoryGroundPlus/sources/memGroundP.c",
+  "output": "F:/cmake_study/memoryGroundPlus/build/CMakeFiles/outputFile.dir/sources/memGroundP.c.obj"
+},
+{
+  "directory": "F:/cmake_study/memoryGroundPlus/build",
+  "command": "F:\\mingw64\\bin\\cc.exe -IF:/cmake_study/memoryGroundPlus/include -g -o CMakeFiles\\outputFile.dir\\sources\\mgp_test.c.obj -c F:\\cmake_study\\memoryGroundPlus\\sources\\mgp_test.c",
+  "file": "F:/cmake_study/memoryGroundPlus/sources/mgp_test.c",
+  "output": "F:/cmake_study/memoryGroundPlus/build/CMakeFiles/outputFile.dir/sources/mgp_test.c.obj"
+}
+]

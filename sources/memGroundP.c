@@ -69,7 +69,7 @@ typedef struct
     size_t totalSize;      ///< 内存池总大小（字节）
     size_t usedSize;       ///< 已使用的大小（字节）
     mgp_ctrl_t *ctrlTable; ///< 控制块表指针
-    short allocBlockCnt;   ///< 已分配的内存块数量
+    int allocBlockCnt;   ///< 已分配的内存块数量
 } mgp_pool_t;
 
 /**
@@ -96,19 +96,21 @@ mgp_t mgp_create_with_pool(void *mem, size_t bytes)
     if (bytes < memMinSize)
         return NULL;
 
-    const uintptr_t memHead = (uintptr_t)mem;
-    const uintptr_t memTail = (uintptr_t)mem + bytes;
+    
     const mgp_pool_t info = {
         .baseAddr = mem,
         .totalSize = bytes,
         .allocBlockCnt = 0U,
         .usedSize = memMinSize,
         .ctrlTable = (void *)((uintptr_t)mem + sizeof(info))};
-    const mgp_pool_t *pInfo = mem;
+    
 
     memset(mem, 0X00, bytes);
     memcpy(mem, &info, sizeof(info));
 #if MGP_CREATE_POOL_DEBUG
+    const uintptr_t memHead = (uintptr_t)mem;
+    const uintptr_t memTail = (uintptr_t)mem + bytes;
+    const mgp_pool_t *pInfo = mem;
     VAR_PRINT_HEX(memHead);
     VAR_PRINT_HEX(memTail);
     VAR_PRINT_UD(pInfo->usedSize);
@@ -245,8 +247,15 @@ _next:
     pool->ctrlTable[idx].pTail = (void *)&((unsigned char *)pBuff)[bufLen - sizeof(unsigned int)];
     pool->ctrlTable[idx].pBuff = (void *)((uintptr_t)pBuff - sizeof(unsigned int));
 
+#if 0
     *(pool->ctrlTable[idx].pHead) = MGP_GUARD_HEAD;
     *(pool->ctrlTable[idx].pTail) = MGP_GUARD_TAIL;
+#else
+    const unsigned int head = MGP_GUARD_HEAD;
+    const unsigned int tail = MGP_GUARD_TAIL;
+    memcpy(pool->ctrlTable[idx].pHead, &head, sizeof(head));
+    memcpy(pool->ctrlTable[idx].pTail, &tail, sizeof(tail));
+#endif 
 #if MGP_CTRL_BLOCK_DEBUG
     VAR_PRINT_HEX((uintptr_t)newCtrl);
     VAR_PRINT_HEX((uintptr_t)&pool->ctrlTable[idx]);
@@ -358,16 +367,24 @@ void *mgp_malloc(mgp_t poolAddr, const size_t bytes)
 #if MGP_MEMORY_ALLOC_DEBUG
     assert(poolAddr);
 #endif
+    // 内存申请前先字节对齐, 申请出来的内存后边应当也是字节对齐
+    const size_t totalBytes = bytes + (sizeof(unsigned int) * 2);
+    const size_t actualSize = (sizeof(unsigned int) - (totalBytes % sizeof(unsigned int))) + totalBytes ; // 缓冲区实际大小
     mgp_pool_t *p = poolAddr;
 
     // 先检查是否超过最大可分配尺寸（包含头尾标记）
     const size_t maxUserSize = mgp_canAllocMaxSize(p);
-    if (bytes > maxUserSize)
+    if (totalBytes > maxUserSize)
         return NULL; // 超过最大可分配尺寸
 
-    const size_t actualSize = bytes + (sizeof(unsigned int) * 2); // 缓冲区实际大小
+    
 
     void *block = mgp_getFreeBlock(p, bytes);
+#if MGP_MEMORY_ALLOC_DEBUG
+    VAR_PRINT_UD(totalBytes);
+    VAR_PRINT_UD(actualSize);
+    VAR_PRINT_HEX((uintptr_t)block);
+#endif
     if (!block)
         return NULL;
 
@@ -556,7 +573,7 @@ static void mgp_ctrlBlockTest(mgp_pool_t *pool)
 void mgp_showAllocBlock(const mgp_pool_t *pool)
 {
     assert(pool);
-
+    return;
     for (int i = 0; i < pool->allocBlockCnt; i++)
     {
         DEBUG_PRINT("block[%d], addr[%x], size[%u]",
@@ -585,9 +602,9 @@ void mgp_test(mgp_t p)
 
     void *mem1, *mem2, *mem3;
     VAR_PRINT_UD(sizeof(unsigned int *));
-    mem1 = mgp_malloc(p, 32);
-    mem2 = mgp_malloc(p, 24);
-    mem3 = mgp_malloc(p, 16);
+    mem1 = mgp_malloc(p, 89);
+    mem2 = mgp_malloc(p, 255);
+    mem3 = mgp_malloc(p, 66);
 
     mgp_showAllocBlock(p);
 

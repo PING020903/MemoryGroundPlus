@@ -1,0 +1,38 @@
+« [main]:build time{ Mar 30 2026 }[ 23:10:13 ]
+[main]:@ChipID=82
+[main]:CH58x_BLE_LIB_V2.13
+[userTask_init]:user task initialization Success~~
+[userTask_init]:SEND a message to user task.{HelloWorld}
+[userTask_init]:periodic state[Success]
+[cmdTable_GetLastError]:hashTable OK
+
+[userTask_init]:user debug command initialize, ok
+[Peripheral_Init]:configuration connection.
+[Peripheral_Init]:configuration pairMode.
+[Peripheral_Init]:configuration BLE buffer max value[264] OK
+[Peripheral_Init]:add server.
+[Peripheral_Init]:add broadcast name.
+[Peripheral_Init]:initialize BLE slave.
+[Main_Circulation]:[0art scheduling
+[user_Task]VAR(((char*)pMsg))STR{HelloWorld}
+[peripheralStateNotificationCB]:Initialized..
+[peripheralStateNotificationCB]:Advertising..
+» test memory
+« [cmdTask_testMemory]VAR(((uintptr_t)pool))line[65]value(200043ec)
+[mgp_test]VAR((align_up(66, 4)))line[670]value(68)
+[mgp_test]VAR((align_down(127, 4)))line[671]value(124)
+[mgp_test]VAR((align_up(66, 8)))line[672]value(72)
+[mgp_test]VAR((align_down(127, 8)))line[673]value(120)
+[mgp_test]VAR(((mgp_ptr_t)mem1))line[675]value(123989)
+[mgp_test]VAR(((mgp_ptr_t)align_ptr(mem1, 4)))line[676]value(12398c)
+[mgp_test]:
+[mgp_getFreeBlock]VAR(((mgp_ptr_t)pool->baseAddr))line[325]value(200043ec)
+[mgp_getFreeBlock]VAR(((mgp_ptr_t)pool->totalSize))line[326]value(400)
+[mgp_getFreeBlock]VAR(((mgp_ptr_t)actualSize))line[327]value(40)
+[mgp_getFreeBlock]VAR(((mgp_ptr_t)pool->totalSize - actualSize))line[328]value(3c0)
+[mgp_getFreeBlock]VAR((((mgp_ptr_t)pool->baseAddr) + pool->totalSize - actualSize))line[329]value(200047ac)
+[mgp_getFreeBlock]VAR(((mgp_ptr_t)ret))line[331]value(200047ac)
+lue(200047ac)
+[cmdTable_GetLastError]:hashTable OK
+
+[user_Task]VAR((cmdTable_GetLastError()))line[92]value(0)

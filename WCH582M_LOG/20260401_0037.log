@@ -1,0 +1,226 @@
+« [main]:build time{ Apr  1 2026 }[ 00:35:41 ]
+[main]:@ChipID=82
+[main]:CH58x_BLE_LIB_V2.13
+[userTask_init]:user task initialization Success~~
+[userTask_init]:SEND a message to user task.{HelloWorld[userTask_init]:periodic state[Success]
+[cmdTable_GetLastError]:hashTable OK
+
+[userTask_init]:user debug command initialize, ok
+[Peripheral_Init]:configuration connection.
+[Peripheral_Init]:configuration pairMode.
+[Peripheral_Init]:configuration BLE buffer max value[264] OK
+[Peripheral_Init]:add server.
+[Peripheral_Init]:add broadcast name.
+[Peripheral_Init]:initialize BLE slave.
+[Main_Circulation]:start scheduling
+[user_Task]VAR(((char*)pMsg))STR{HelloWorld}
+[peripheralStateNotificationCB]:Initialized..
+[peripheralStateNotificationCB]:Advertising..
+» test memory
+« 
+╔══════════════════════════════════════════╗
+║   Memory Ground Plus - Test Suite       ║
+╚═══════�══════════════════════════════════╝
+
+>>> Running Level 1: Basic Functionality Tests
+
+=====================================
+Running test_001_pool_create_normal...
+==================================
+[test_001_pool_create_normal]:Pool created at: 0x20007b0c
+[PASS] test_001_pool_create_normal
+
+=====================================
+Running test_002_pool_creamin_size...
+=====================================
+[test_002_pool_create_min_size]:Minimum pool size: 128 bytes
+[PASS] test_002_pool_create_min_size
+
+=====================================
+Running test_003_pool_create_too_small...
+===================================
+[test_003_pool_create_too_small]:Testing with size: 32 (too small)
+[PASS] test_003_pool_create_too_small
+
+=====================================
+Running test_004_max_alloc_size_query...
+==================================
+[test_004_max_alloc_size_query]:Max allocatable size: 476 bytes
+yPASS] test_004_max_alloc_size_query
+
+>>> Running Level 2: Memor Allocation Tests
+
+=====================================
+Runningtest_010_single_alloc_small...
+=====================================
+[test_010_single_alloc_small]:Allocated block at: 0x20007efc
+[PASS] test_010_single_alloc_small
+
+=====================================
+Running test_011_singlealloc_large...
+=====================================
+[test_011_single_alloc_large]:Large block allocated at: 0x20007d30, size: 466
+[PASS] test_011_single_alloc_large
+
+=====================================
+Running test_012_multiple_allocations...
+=====================================
+[test_012_multiple_allocations]:Three blocks allocated: [0x20007ee0], [0x20007ea0], [0x20007e20]
+[PASS] test_012_multiple_allocations
+
+====================================
+Running test_013_alloc_until_full...
+=====================================
+[test_013_alloc_until_full]:Successfully allocated 11 blocks
+[PASS] test_013_alloc_until_full
+
+>>> Running Level 3: Memory Free Tests
+
+=====================================
+Running test_020_single_free...
+=====================================
+[test_020_single_free]:Block freed successfully
+[PASS] test_020_single_free
+
+=====================================
+Rnning test_021_random_order_free...
+=====================================
+[test_021_random_order_free]:Freed mem2
+[test_021_random_order_free]:Freed mem1
+[test_021_random_order_free]:Freed mem3
+[test_021_random_order_free]:All blocks freed in random order
+[PASS] test_021_random_order_free
+
+=====================================
+Running test_022_double_free...
+=====================================
+[test_022_double_free]:First free succeeded
+[test_022_double_free]:Attempting double free (behavior depends on implementation)
+[PASS] test_022_double_free
+
+=====================================
+Running test_023_free_invalid_address...
+=====================================
+[test_023_free_invalid_address]:Attempting to free invalid address (stack variable)
+[test_023_free_invalid_address]:Invalid free test skipped to avoid undefined behavior
+[PASS] test_023_free_invalid_address
+
+>>> Running Level 4: Fragmentation Tests
+
+=====================================
+Running test_030_fragmentation_reuse...
+==================================
+[test_030_fragmentation_reuse]:Before free - A=0x20007edc, B=0x20007e9c, C=0x20007e7c
+[test_030_fragmentation_reuse]:Freed B (middle block)
+[test_030_fragmentation_reuse]:After alloc - D=0x20007e9c
+[PASS] test_030_fragmentation_reuse
+
+=====================================
+Running test_031_fragment_size_matching...
+=====================================
+[test_031_fragment_size_matching]:Created two fragments
+[test_031_fragment_size_matching]:New block allocated at: 0x20007db0
+[PASS] test_031_fragment_size_matching
+
+>>> Running Level 5: Boundary Condition Tests
+
+=====================================
+Running test_040_zero_length_alloc...
+=====================================
+[test_040_zero_length_alloc]:Attempting zero length alloc (will assert - this is expected)
+[test_040_zero_length_alloc]:Zero length alloc test skipped (expected to fail with assert)
+[PASS] test_040_zero_length_alloc
+
+=====================================
+Running test_041_tiny_alloc...
+=====================================
+[test_041_tiny_alloc]:Minimum block allocated at: 0x20007efc
+[PASS] test_041_tiny_alloc
+
+=====================================
+Running test_042_max_size_alloc...
+=====================================
+[test_042_max_size_alloc]:Max user size reported: 476 bytes
+[test_042_max_size_alloc]:Max size block allocated: 466 bytes
+[PASS] test_042_max_size_alloc
+
+=====================================
+Running test_03_over_max_size_alloc...
+=====================================
+[test_043_over_max_size_alloc]:Max size: 476, trying to alloc: 477
+[test_043_over_max_size_alloc]:Correctly returned NULL>for oversized allocation
+[PASS] test_043_over_max_size_alloc
+
+>> Running Level 6: Data Integrity Tests
+
+=====================================
+Running test_050_guard_mark_protection...
+=====================================
+[test_050_guard_mark_protection]:Guard marks protection test completed
+[PASS] test_050_guard_mark_protection
+
+=====================================
+Running test_051_buffer_overflow...
+=====================================
+[test_051_buffer_overflow]:Buffer boundary test - wrote 32 bytes to 32-byte block
+[test_051_buffer_overflow]:Block freed successfully after boundary test
+[PASS] test_051_buffer_overflow
+
+=====================================
+Running test_052_data_isol...
+=====================================
+[test_052_data_isolation]:Data isolation verified
+[PASS] test_052_data_isolation
+
+>>> Running Level 7: Stress Tests
+
+=====================================
+Running test_060_stress_small_allocs...
+==================================
+[test_060_stress_small_allocs]:Stress test: 100/100 small allocations succeeded
+[PASS] test_060_stress_small_allocs
+
+=================================
+Running test_061_random_mixed_operations...
+====================================
+[test_061_random_mixed_operations]:Random ops: 100/100 succeeded, final count: 10
+[PASS] test_061_random_mixed_operations
+
+>>> Running Level 8: Realloc Tests
+
+=====================================
+Running test_070_realloc_null...
+=====================================
+[PASS] test_070_realloc_null
+
+=====================================
+Running test_071_realloc_expand...
+=====================================
+[PASS] test_071_realloc_expand
+
+=====================================
+Running test_072_realloc_shrink...
+================================
+[PASS] test_072_realloc_shrink
+
+=====================================
+Runntest_073_realloc_zero...
+=====================================
+[test_073_realloc_zero]:Testing realloc to zero size (implementation dependent)
+[PASS] test_073_realloc_zero
+
+
+══════════════════════════════════════════
+           TEST SUMMARY REPORT            
+══════════════════════════════════════════
+Total Tests:     27
+Passed:          27
+Failed:          0
+Pass Rate:       %
+══════════════════════════════════════════
+
+✓ ALL TESTS PASSED!
+
+[cmdTable_GetLastError]:hashTable OK
+
+[user_Task]VAR((cmdTable_GetLastError()))line[92]value(0)

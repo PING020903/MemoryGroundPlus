@@ -11,6 +11,9 @@
 #include <stdint.h>
 
 #define MGP_DEBUG 1
+#define MGP_MG_NUM 0
+
+#define MGP_ALIGN_NUM 4
 
 /** @defgroup MGP_CONFIG 配置选项 */
 /** @defgroup MGP_TYPE 类型定义 */
@@ -21,8 +24,10 @@
 /** @addtogroup MGP_CONST
  *  @{
  */
+#if MGP_MG_NUM
 #define MGP_GUARD_HEAD       0xDEADBEEFU    ///< 头部保护标记，用于检测内存块头部是否被破坏
 #define MGP_GUARD_TAIL       0xCAFEBABEU    ///< 尾部保护标记，用于检测内存块尾部是否被破坏
+#endif
 /**  @} */
 
 /* ==================== 错误码定义 ==================== */
@@ -33,8 +38,7 @@
 #define MGP_ERR_ARG          (-1)            ///< 参数错误
 #define MGP_ERR_ALIGN        (-2)            ///< 对齐错误
 #define MGP_ERR_NOMEM        (-3)            ///< 内存不足
-#define MGP_ERR_CORRUPT_HEAD (-10)           ///< 头部损坏
-#define MGP_ERR_CORRUPT_TAIL (-11)           ///< 尾部损坏
+#define MGP_ERR_CORRUPT      (-10)           ///< 检验损坏
 #define MGP_ERR_NOT_INIT     (-20)           ///< 未初始化
 /**  @} */
 
@@ -96,6 +100,21 @@ void *mgp_malloc(mgp_t poolAddr, const size_t bytes);
  * - 如果释放非本池分配的地址会报错
  */
 void mgp_free(mgp_t poolAddr, void *p);
+
+/**
+ * @brief 重新分配内存块大小
+ * @param[in] poolAddr 内存池句柄
+ * @param[in] src 已分配的内存块指针
+ * @param[in] bytes 需要重新分配的字节数
+ * @return 成功返回新的内存块指针，失败返回 NULL
+ * @details 
+ * - 如果 src 为 NULL，等同于 mgp_malloc
+ * - 如果 bytes 小于等于原块大小，返回原指针且不释放
+ * - 否则分配新块并复制原数据，然后自动释放原块
+ * - 新块地址可能与原地址相同或不同
+ * @note 原指针在函数内部会被自动释放，无需手动调用 mgp_free
+ */
+void *mgp_realloc(mgp_t poolAddr, void *src, const size_t bytes);
 
 #if MGP_DEBUG
 /**

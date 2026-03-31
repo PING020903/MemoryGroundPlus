@@ -1,0 +1,50 @@
+« [main]:build time{ Mar 31 2026 }[ 23:02:55 ]
+[main][0m@ChipID=82
+[main]:CH58x_BLE_LIB_V2.13
+[userTask_init]:user task initialization Success~~
+[userTask_init]:SEND a message to user task.{HelloWorld}
+[userTask_init]:periodic state[Success]
+[cmdTable_GetLastError]:hashTable OK
+
+[userTask_init]:user debug command initialize, ok
+[Peripheral_Init]:configuration connection.
+[Peripheral_Init]:configuration pairMode.
+[Peripheral_Init]:configuration BLE buffer max value[264] OK
+[Peripheral_Init]:add server.
+[Peripheral_Init]:add broadcast name.
+[Peripheral_Init]:initialize BLE slave.
+[Main_Circulation]:start scheduling
+[user_Task]VAR(((char*)pMsg))STR{HelloWorld}
+[peripheralStateNotificationCB]:Initialized..
+[peripheralStateNotificationCB]:Advertising..
+» test memory
+« [cmdTask_testMemory]VAR(((uintptr_t)pool))line[65]value(200043ec)
+[mgp_test]VAR((mgp_canAllocMaxSize(p)))line[664]value(988)
+[mgp_test]VAR(((mgp_ptr_t)mem1))line[668]value(20004790)
+[mgp_test]VAR(((mgp_ptr_t)mem2))line[669]value(20004690)
+[mgp_test]VAR(((mgp_ptr_t)mem3))line[670]value(2000464c)
+[mgp_showAllocBlock]:block[0], size[92] blockAddr[20004790] | ctrlAddr[20004408] ctrlBufAddr[2000440c]
+[mgp_showAllocBlock]:block[1], size[256] blockAddr[20004690] | ctrlAddr[20004410] ctrlBufAddr[20004414]
+[mgp_showAllocBlock]:block[2], size[68] blockAddr[2000464c] | ctrlAddr[20004418] ctrlBufAddr[2000441c]
+[mgp_test]VAR((mgp_canAllocMaxSize(p)))line[673]value(548)
+[mgp_test]VAR(((char *)mem1))STR{HELLO WORLD ! ! !}
+[mgp_test]VAR((unsigned char *)mem1)[size:32]HEX
+        [48] [45] [4c] [4c] [4f] [20] [57] [4f] 
+        [52] [4c] [44] [20] [21] [20] [21] [20] 
+        [21] [0] [0] [0] [0] [0] [0] [0] 
+        [0] [0] [0] [0] [0] [0] [0] [0] 
+[mgp_showAllocBlock]:block[0], size[68] blockAddr[2000464c] | ctrlAddr[20004408] ctrlBufAddr[2000440c]
+[mgp_showAllocBlock]:block[1], size[256] blockAddr[20004690] | ctrlAddr[20004410] ctrlBufAddr[20004414]
+[mgp_showAllocBlock]:block[0], size[256] blockAddr[20000] | ctrlAddr[20004408] ctrlBufAddr[2000440c]
+[mgp_showAllocBlock]:block[1], size[68] blockAddr[2000464c] | ctrlAddr[20004410] ctrlBufAddr[20004414]
+[mgp_showAllocBlock]:block[2], size[24] blockAddr[20004790] | ctrlAddr[20004418] ctrlBufAddr[2000441c]
+[mgp_showAllocBlock]:block[0], size[24] blockAddr[20004790] | ctrlAddr[20004408] ctrlBufAddr[2000440c]
+[mgp_showAllocBlock]:block[1], size[256] blockAddr[20004690] | ctrlAddr[20004410] ctrlBufAddr[20004414]
+[mgp_showAllocBlock]:block[0], size[24] blockAddr[20004790] | ctrlAddr[20004408] ctrlBufAddr[2000440c]
+[mgp_showAllocBlock]:NO ALLOC
+[mgp_test]VAR(((mgp_ptr_t)mem1))line[705]value(20004790)
+[mgp_test]VAR(((mgp_ptr_t)mem2))line[706]value(20004690)
+[mgp_test]VAR(((mgp_ptr_t)mem3))line[707]value(2000464c)
+[cmdTable_GetLastError]:hashTable OK
+
+[user_Task]VAR((cmdTable_GetLastError()))line[92]value(0)

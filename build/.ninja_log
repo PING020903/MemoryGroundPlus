@@ -1,5 +1,5 @@
 # ninja log v7
-23	133	7959812874195485	CMakeFiles/outputFile.dir/sources/main.c.obj	ac53075b6264178e
-31	242	7959812874275517	CMakeFiles/outputFile.dir/sources/memGroundP.c.obj	7071875e0b1d835
-36	359	7959812874325533	CMakeFiles/outputFile.dir/sources/mgp_test.c.obj	209e08497e2aa0f3
-360	513	7959812877563905	bin/outputFile.exe	1fe955296a58e80e
+25	124	7966767210192616	CMakeFiles/outputFile.dir/sources/main.c.obj	ac53075b6264178e
+33	243	7966767210262624	CMakeFiles/outputFile.dir/sources/memGroundP.c.obj	7071875e0b1d835
+38	376	7966767210322468	CMakeFiles/outputFile.dir/sources/mgp_test.c.obj	209e08497e2aa0f3
+377	528	7966767213702380	bin/outputFile.exe	1fe955296a58e80e
